@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Prediction - Malaysia Animal Disease Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .prediction-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+        
+        .prediction-header {
+            background: linear-gradient(to right, #2c5f2d, #97bc62);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .prediction-form {
+            padding: 30px;
+        }
+        
+        .risk-meter {
+            height: 30px;
+            background: #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .risk-level {
+            height: 100%;
+            background: linear-gradient(to right, #2c5f2d, #f5c542, #dc3545);
+            border-radius: 15px;
+            transition: width 0.5s ease;
+        }
+        
+        .risk-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        .result-card {
+            display: none;
+            animation: fadeIn 0.5s forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .ai-icon {
+            font-size: 4rem;
+            color: #2c5f2d;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-paw me-2"></i>
+                Malaysia Animal Health Watch
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="map.html"><i class="fas fa-map-marked-alt me-1"></i> Disease Map</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="data.html"><i class="fas fa-database me-1"></i> Disease Data</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="predict.html"><i class="fas fa-robot me-1"></i> AI Prediction</a>
+                    </li>
+                    <li class="nav-item position-relative">
+                        <a class="nav-link" href="#" id="notificationBtn"><i class="fas fa-bell me-1"></i> Notifications
+                            <span class="notification-badge" id="notificationCount">3</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Prediction Header -->
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section-title">AI Disease Prediction</h2>
+                <p class="text-center mb-4">Predict potential disease outbreaks using our AI model</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="prediction-card">
+                    <div class="prediction-header">
+                        <i class="fas fa-brain fa-3x mb-3"></i>
+                        <h3>Animal Health Risk Predictor</h3>
+                        <p class="mb-0">Our AI analyzes multiple factors to predict disease risks</p>
+                    </div>
+                    <div class="prediction-form">
+                        <form id="predictionForm">
+                            <div class="mb-4">
+                                <label class="form-label h5"><i class="fas fa-cow me-2"></i> Animal Type</label>
+                                <select class="form-select form-select-lg" id="animalType" required>
+                                    <option value="">Select animal type</option>
+                                    <option value="cattle">Cattle</option>
+                                    <option value="poultry">Poultry</option>
+                                    <option value="swine">Swine</option>
+                                    <option value="goat">Goat</option>
+                                    <option value="sheep">Sheep</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <label class="form-label h5"><i class="fas fa-map-marker-alt me-2"></i> Location</label>
+                                    <select class="form-select" id="state" required>
+                                        <option value="">Select state</option>
+                                        <option value="johor">Johor</option>
+                                        <option value="kedah">Kedah</option>
+                                        <option value="kelantan">Kelantan</option>
+                                        <option value="malacca">Malacca</option>
+                                        <option value="negeri_sembilan">Negeri Sembilan</option>
+                                        <option value="pahang">Pahang</option>
+                                        <option value="penang">Penang</option>
+                                        <option value="perak">Perak</option>
+                                        <option value="perlis">Perlis</option>
+                                        <option value="sabah">Sabah</option>
+                                        <option value="sarawak">Sarawak</option>
+                                        <option value="selangor">Selangor</option>
+                                        <option value="terengganu">Terengganu</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label h5"><i class="fas fa-hashtag me-2"></i> Number of Animals</label>
+                                    <input type="number" class="form-control" id="animalCount" min="1" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="form-label h5"><i class="fas fa-thermometer-half me-2"></i> Recent Symptoms</label>
+                                <textarea class="form-control" id="symptoms" rows="3" placeholder="e.g., fever, loss of appetite, lameness" required></textarea>
+                                <div class="form-text">Enter symptoms separated by commas</div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="form-label h5"><i class="fas fa-cloud-sun me-2"></i> Recent Weather Conditions</label>
+                                <select class="form-select" id="weather" required>
+                                    <option value="">Select weather condition</option>
+                                    <option value="dry">Dry</option>
+                                    <option value="rainy">Rainy</option>
+                                    <option value="humid">Humid</option>
+                                    <option value="flood">Flood</option>
+                                </select>
+                            </div>
+                            
+                            <div class="text-center mt-5">
+                                <button type="submit" class="btn btn-primary btn-lg px-5 py-3">
+                                    <i class="fas fa-brain me-2"></i> Analyze Disease Risk
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="prediction-card result-card" id="predictionResult">
+                    <div class="prediction-header">
+                        <i class="fas fa-chart-line fa-3x mb-3"></i>
+                        <h3>Prediction Results</h3>
+                        <p class="mb-0">Based on your input and our AI analysis</p>
+                    </div>
+                    <div class="prediction-form">
+                        <div class="text-center mb-5">
+                            <div class="ai-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h3>Predicted Disease: <span class="text-primary" id="diseaseName">Foot and Mouth Disease</span></h3>
+                            
+                            <div class="mt-5">
+                                <h4>Risk Level</h4>
+                                <div class="risk-meter mt-3">
+                                    <div id="riskBar" class="risk-level" style="width: 85%"></div>
+                                </div>
+                                <div class="risk-labels">
+                                    <span>Low</span>
+                                    <span>Medium</span>
+                                    <span>High</span>
+                                </div>
+                                <h2 class="mt-3" id="riskLevel">High Risk (85%)</h2>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-warning">
+                            <h4><i class="fas fa-exclamation-triangle me-2"></i> Recommended Actions:</h4>
+                            <ul id="recommendedActions" class="mt-3">
+                                <li>Isolate affected animals immediately</li>
+                                <li>Contact veterinary services for diagnosis</li>
+                                <li>Disinfect housing and equipment</li>
+                                <li>Restrict movement of animals in and out of the farm</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="mt-5">
+                            <h4><i class="fas fa-shield-alt me-2"></i> Preventive Measures</h4>
+                            <p id="preventiveMeasures" class="lead mt-3">Vaccinate healthy animals, maintain strict biosecurity measures, and monitor animals daily for symptoms. Implement quarantine procedures for new animals and regularly disinfect facilities.</p>
+                        </div>
+                        
+                        <div class="mt-5 text-center">
+                            <button class="btn btn-outline-primary me-2" id="newPredictionBtn">
+                                <i class="fas fa-redo me-2"></i> Make Another Prediction
+                            </button>
+                            <button class="btn btn-primary">
+                                <i class="fas fa-download me-2"></i> Download Full Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h4><i class="fas fa-paw me-2"></i> Malaysia Animal Health Watch</h4>
+                    <p>Tracking and monitoring animal diseases to protect Malaysia's livestock and wildlife.</p>
+                    <div class="mt-3">
+                        <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-light"><i class="fas fa-chevron-right me-2"></i> Disease Dashboard</a></li>
+                        <li><a href="map.html" class="text-light"><i class="fas fa-chevron-right me-2"></i> Outbreak Map</a></li>
+                        <li><a href="data.html" class="text-light"><i class="fas fa-chevron-right me-2"></i> Data Repository</a></li>
+                        <li><a href="predict.html" class="text-light"><i class="fas fa-chevron-right me-2"></i> AI Prediction</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Contact</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope me-2"></i> info@animalhealth.my</li>
+                        <li><i class="fas fa-phone me-2"></i> +603-1234 5678</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> Veterinary Services Department, Putrajaya</li>
+                    </ul>
+                    <div class="mt-3">
+                        <button class="btn btn-outline-light"><i class="fas fa-bug me-2"></i> Report Outbreak</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center py-3">
+                <p class="mb-0">&copy; 2023 Malaysia Animal Health Watch. All rights reserved.</p>
+                <p class="mb-0">Data updated automatically every 30 minutes</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification Panel -->
+    <div class="notification-panel" id="notificationPanel">
+        <div class="notification alert alert-light mb-3">
+            <h5><i class="fas fa-exclamation-circle text-danger me-2"></i> New Outbreak Alert</h5>
+            <p class="mb-0">Foot and Mouth Disease reported in Kelantan - 5 new cases</p>
+            <small>10 minutes ago</small>
+        </div>
+        <div class="notification alert alert-light mb-3">
+            <h5><i class="fas fa-info-circle text-primary me-2"></i> Data Update</h5>
+            <p class="mb-0">Avian Influenza cases updated in Selangor</p>
+            <small>45 minutes ago</small>
+        </div>
+        <div class="notification alert alert-light">
+            <h5><i class="fas fa-check-circle text-success me-2"></i> Disease Contained</h5>
+            <p class="mb-0">Brucellosis outbreak in Terengganu has been contained</p>
+            <small>2 hours ago</small>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="scripts.js"></script>
+    <script>
+        // Setup new prediction button
+        document.getElementById('newPredictionBtn').addEventListener('click', function() {
+            document.getElementById('predictionResult').style.display = 'none';
+            document.getElementById('predictionForm').reset();
+        });
+    </script>
+</body>
+</html>
