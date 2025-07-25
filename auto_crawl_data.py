@@ -16,7 +16,7 @@ def setup_driver():
 
 # Step 2: Crawl WOAH WAHIS for Malaysia reports
 def crawl_woah_malaysia():
-    url = "https://wahis.woah.org/#/event-management?Country=Malaysia"
+    url = "https://wahis.woah.org/#/event-management"
     driver = setup_driver()
     driver.get(url)
 
