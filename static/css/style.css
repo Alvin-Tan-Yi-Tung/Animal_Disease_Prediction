@@ -1,0 +1,1247 @@
+/* Compact styles for the new layout */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-size: 0.9rem;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 25%;
+    height: 100%;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    z-index: 1000;
+    padding: 10px;
+    background-color: #f8f9fa;
+}
+
+.main-content {
+    margin-left: 25%;
+    width: 75%;
+    padding: 10px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.tab-content-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.map-container {
+    flex: 1;
+    height: 65vh !important;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+#map {
+    height: 100%;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 6px;
+    background: #e9ecef;
+    border-radius: 6px;
+    flex: 1;
+    margin: 0 3px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #0d6efd;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* Date range display */
+.date-range-container {
+    text-align: center;
+    padding-top: 6px;
+    border-top: 1px solid #e9ecef;
+    margin-top: 6px;
+}
+
+.card {
+    margin-bottom: 8px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.card-body {
+    padding: 8px;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.nav-tabs .nav-link {
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 8px 12px;
+}
+
+.tab-content {
+    flex: 1;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#map-pane {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.prediction-container {
+    margin-top: 8px;
+    background-color: #eef7ff;
+    border-radius: 8px;
+    padding: 8px;
+    border-left: 3px solid #0d6efd;
+}
+
+.prediction-result {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #0d6efd;
+    text-align: center;
+    margin-top: 6px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 极速0 2px 6px rgba(0,0,0,0.1);
+    border-left: 4px solid #0d6efd;
+}
+
+.prediction-result span {
+    display: block;
+    margin-top: 5px;
+    font-size: 2rem;
+    color: #198754;
+}
+
+.form-label {
+    font-size: 0.8rem;
+    margin-bottom: 3px;
+}
+
+.form-control, .form-select {
+    font-size: 0.8rem;
+}
+
+.btn {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+}
+
+.btn-sm {
+    padding: 3px 6px;
+    font-size: 0.75rem;
+}
+
+/* Adjust chart container heights */
+.chart-container {
+    height: 100% !important;
+}
+
+/* Hide leaflet attribution in map and timeline map */
+#map ~ .leaflet-control-container .leaflet-control-attribution,
+#timeline-map ~ .leaflet-control-container .leaflet-control-attribution {
+    display: none !important;
+}
+
+/* Timeline specific styles */
+#timeline-map {
+    height: 100%;
+    width: 100%;
+    min-height: 400px;
+}
+
+.timeline-controls {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.timeline-marker {
+    transition: all 0.3s ease;
+}
+
+#timelineProgress {
+    transition: width 0.2s ease;
+}
+
+.timeline-date-display {
+    font-weight: bold;
+    color: #0d6efd;
+}
+
+.timeline-info-panel {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Big red circle styles with perfect centering - UPDATED */
+.big-red-circle {
+    background-color: #ff0000;
+    border-radius: 50%;
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0 0 3px rgba(0,0,0,0.8);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+    text-align: center;
+    line-height: 1;
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+.big-red-circle-pulse {
+    animation: redPulse 1.5s infinite;
+}
+
+@keyframes redPulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.big-red-circle span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+
+/* Ensure all circle markers have centered text - UPDATED */
+.big-red-circle-marker {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+/* Timeline marker cluster styles - UPDATED for better centering */
+.timeline-marker-cluster {
+    background-clip: padding-box;
+    border-radius: 50%;
+    background-color: #ff4444;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+}
+
+.timeline-marker-cluster div {
+    width: auto;
+    height: auto;
+    margin-left: 5px;
+    margin-top: 5px;
+    border-radius: 50%;
+    font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: white;
+
+    /* Flexbox centering */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Prevent text shift */
+    line-height: 1;
+    text-align: center;
+    padding: 0;
+}
+
+
+.timeline-marker-cluster span {
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Timeline filter status */
+#timelineFilterStatus {
+    font-size: 0.9rem;
+    padding: 10px 15px;
+    margin-bottom: 0;
+}
+
+/* Button styles for timeline */
+#playTimeline {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+#pauseTimeline {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #212529;
+}
+
+#clearTimelineFilters {
+    width: auto;
+}
+
+/* Responsive adjustments for timeline filters */
+@media (max-width: 768px) {
+    .timeline-filters .col-md-4 {
+        margin-bottom: 15px;
+    }
+    
+    #clearTimelineFilters, #applyTimelineFilters {
+        width: 48%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Map controls styling */
+.leaflet-control {
+    background: rgba(255, 255, 255, 极速0.85);
+    border-radius: 6极速px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    border: none;
+    padding: 5px;
+}
+
+.leaflet-bar a {
+    border-radius: 4px !important;
+    border: none !important;
+    margin-bottom: 4px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    background: white;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.leaflet-bar a:hover {
+    background: #f0f0f0;
+}
+
+.leaflet-control-attribution {
+    background: rgba(255, 255, 255, 0.7) !important;
+    border-radius: 4px !important;
+    padding: 2px 8px !important;
+    font-size: 11px !important;
+    color: #666 !important;
+    margin: 0 !important;
+    max-width: 60%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.leaflet-control-attribution a {
+    color: #0066cc !important;
+    text-decoration: none;
+}
+
+/* Pulse animation for active outbreaks */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(26, 152, 80, 0.4); }
+    70% { box-shadow: 0 0 极速0 10px rgba(26, 152, 80, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(26, 152, 80, 0); }
+}
+
+.pulse-marker {
+    animation: pulse 2s infinite;
+    position: relative;
+}
+
+.date-validation {
+    font-size: 0.8rem;
+    color: #dc3545;
+    margin-top: 4px;
+    display: none;
+}
+
+/* Fixed table header styles */
+#outbreakTable {
+    table-layout: fixed;
+    width: 100% !important;
+}
+
+#outbreakTable th,
+#outbreakTable td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#outbreakTable th:n极速th-child(1) { width: 10%; } /* Type */
+#outbreakTable th:nth-child(2) { width: 15%; } /* Country */
+#outbreakTable th:nth-child(3) { width: 20%; } /* Location */
+#outbreakTable th:nth-child(4) { width: 15%; } /* Start Date */
+#outbreakTable th:nth-child(5) { width: 15%; } /* End Date */
+#outbreakTable th:nth-child(6) { width: 12%; } /* Cases */
+#outbreakTable th:nth-child(7) { width: 13%; } /* Deaths */
+
+#outbreakTable_wrapper {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.dataTables_length,
+.dataTables_filter {
+    padding: 15px;
+    background-color: #f8f9fa;
+}
+
+.dataTables_info {
+    padding: 15px;
+}
+
+.dataTables_paginate {
+    padding: 10px 15px;
+}
+
+/* Date sort dropdown styles */
+.date-sort-container {
+    margin-left: 10px;
+}
+
+.date极速-sort-container select {
+    width: 150px;
+}
+
+/* Table controls layout */
+.table-controls {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Styles for the new timeline chart */
+#mapTimelineChart {
+    max-height: 250px;
+}
+
+.map极速-tab-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#mapTimelineChart-container {
+    height: 25vh !important;
+    margin-top: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+    
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        height: auto;
+    }
+
+    .map-container {
+        height: 40vh;
+    }
+    
+    #mapTimelineChart-container {
+        height: 25vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .map-container {
+        height: 40vh;
+    }
+    
+    #mapTimelineChart-container {
+        height: 20vh;
+    }
+}
+
+/* Style for prediction country filter */
+#predictionCountry {
+    margin-bottom: 10px;
+}
+
+/* Prediction marker styles - UPDATED */
+.prediction-marker {
+    background-color: #4575b4 !important;
+    z-index: 1000 !important;
+}
+
+.prediction-label {
+    color: white !important;
+    text-shadow: 0 0 4px rgba(0,0,0,0.9) !important;
+    z-index: 1001 !important;
+}
+
+/* Update legend to include predictions */
+.legend .d-flex.align-items-center.mb-2:last-child {
+    margin-bottom: 0 !important;
+}
+
+.legend .d-flex.align-items-center.mb-2:nth-child(2) {
+    margin-bottom: 10px;
+}
+
+.legend .d-flex.align-items-center.mb-2:after {
+    content: "";
+    display: block;
+    margin: 5px 0;
+    border-bottom: 1px solid #eee;
+    width: 100%;
+}
+
+.legend .d-flex.align-items-center.mb-2:last-child:after {
+    display: none;
+}
+
+/* Add prediction to legend */
+.legend div.d-flex.align-items-center.mb-2:nth-child(2) {
+    margin-top: 10px;
+}
+
+.custom-circle-marker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 3px rgba(0,0,0,0.8);
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+}
+
+.custom-circle-marker:hover {
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+    transform: scale(1.05);
+    z-index: 1000 !important;
+}
+
+.circle-label {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    font-weight: bold;
+    text-align: center;
+    font-size: 18px !important;
+    text-shadow: 0 0 4px rgba(0,0,0,0.9) !important;
+}
+
+.marker-cluster {
+    background-clip: padding-box;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.marker-cluster div {
+    width: 40px;
+    height: 40px;
+    margin-left: 5px;
+    margin-top: 5px;
+    text-align: center;
+    border-radius: 50%;
+    font: 18px "Helvetica Neue", Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+.marker-cluster span {
+    line-height: 40px;
+}
+
+.scrollable-content {
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.prediction-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.prediction-title i {
+    font-size: 1.4rem;
+    color: #0d6efd;
+}
+
+.map-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e9ecef;
+    color: #6c757d;
+    font-size: 1.2rem;
+    z-index: 100;
+}
+
+.legend {
+    background: rgba(255, 255, 255, 0.88);
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    line-height: 18px;
+    z-index: 1001;
+    font-size: 13px;
+    color: 444;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.legend h4 {
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #222;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+.legend-icon {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+    border: 1px solid rgba(255,255,255,0.5);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    flex-shrink: 0;     /* prevent shrinking */
+}
+
+.legend span {
+    white-space: nowrap;  /* prevent text wrapping */
+}
+
+
+/* Ensure map containers have proper height */
+#map, #timeline-map {
+    height: 100%;
+    min-height: 300px;
+}
+
+/* Adjust tab content height */
+.tab-content {
+    height: calc(100% - 40px);
+    overflow-y: auto;
+}
+
+/* Make sure the sidebar doesn't cause horizontal scrolling */
+.sidebar {
+    overflow-y: auto;
+    height: 100%;
+}
+
+/* Ensure the main content area fits properly */
+.main-content {
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Prediction section adjustments - removed scrolling */
+.prediction-container {
+    margin-top: 8px;
+    background-color: #eef7ff;
+    border-radius: 8px;
+    padding: 8px;
+    border-left: 3px solid #0d6efd;
+}
+
+/* Filter tab specific styles */
+#filter .map-container {
+    height: 60vh;
+    margin-top: 10px;
+}
+
+#filter .tab-pane {
+    display: flex;
+    flex-direction: column;
+}
+
+#filter .card {
+    margin-bottom: 10px;
+}
+
+/* Distinct styles for actual markers */
+.actual-marker {
+    z-index: 800;
+    filter: drop-shadow(0 2px 4px rgba(26, 152, 80, 0.4));
+}
+
+.actual-label {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    font-weight: bold;
+    text-align: center;
+    font-size: 18px !important;
+    text-shadow: 0 0 4极速px rgba(0,0,0,0.9) !important;
+    color: white !important;
+    z-index: 801;
+}
+
+/* Distinct styles for prediction markers - UPDATED */
+.prediction-marker {
+    z-index: 1000 !important;
+    filter: drop-shadow(0 2px 4px rgba(69, 117, 180, 0.4)) !important;
+}
+
+.prediction-label {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    font-weight: bold;
+    text-align: center;
+    font-size: 18px !important;
+    text-shadow: 0 0 4px rgba(0,0,0,0.9) !important;
+    color: white !important;
+    z-index: 1001 !important;
+}
+
+/* Different pulse animation for predictions - UPDATED */
+@keyframes predictionPulse {
+    0% { 
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(69, 117, 180, 0.7);
+    }
+    70% { 
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(69, 117, 180, 0);
+    }
+    100% { 
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(69, 117, 180, 0);
+    }
+}
+
+.prediction-pulse-marker {
+    animation: prediction极速Pulse 2s infinite;
+    position: relative;
+}
+
+/* Ensure prediction markers appear above actual markers */
+.prediction-marker {
+    z-index: 1000 !important;
+}
+
+.prediction-label {
+    z-index: 1001 !important;
+}
+
+/* NEW: Compact sidebar layout */
+.sidebar-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* NEW: Map tab filter section */
+.map-filter-section {
+    margin-bottom: 8px;
+}
+
+/* NEW: Adjust sidebar content spacing */
+.sidebar-sticky {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 100%;
+}
+
+/* NEW: Adjust statistics card to fixed height */
+.stats-container {
+    min-height: 70px;
+}
+
+/* NEW: Ensure prediction circles are always visible */
+.prediction-circle-marker {
+    filter: drop-shadow(0 0 8px rgba(69, 117, 180, 0.8)) !important;
+}
+
+/* Prediction cluster styles */
+.prediction-cluster-icon {
+    background: transparent !important;
+    border: none !important;
+}
+
+.prediction-cluster {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    background-color: #4575b4 !important;
+    border: 3px solid rgba(255, 255, 255, 0.8) !important;
+}
+
+.prediction极速-cluster span {
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Ensure prediction clusters appear above actual clusters */
+.prediction-cluster-icon {
+    z-index: 极速1000 !important;
+}
+
+/* Enhanced styles for prediction clusters with centered text */
+.leaflet-marker-icon.prediction-cluster-icon {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.leaflet-marker-icon极速.prediction-cluster-icon .prediction-cluster {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.leaflet-marker-icon.prediction-cluster-icon .prediction-cluster span {
+    display: block;
+    width: 100%;
+    text-align: center;
+    line-height: 1;
+}
+
+/* Highlight for total outbreaks */
+.total-outbreaks-highlight {
+    background-color: #e8f5e8;
+    border-left: 4px solid #198754;
+}
+
+/* Prediction section header */
+.prediction-title {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    margin-bottom: 10px;
+}
+
+.prediction-title i {
+    font-size: 1.4rem;
+    color: #0d6efd;
+}
+
+.prediction-title .badge {
+    font-size: 0.8rem;
+    background-color: #6c757d;
+}
+
+/* Remove DataTables sorting arrows */
+table.dataTable>thead .sorting:before,
+table.dataTable>thead .sorting_asc:before,
+table.dataTable>thead .sorting_desc:before,
+table.dataTable>thead .sorting_asc_disabled:before,
+table.dataTable>thead .sorting_desc_disabled:before {
+    content: none !important; /* Hides arrows */
+}
+
+table.dataTable>thead .sorting:after,
+table.dataTable>thead .sorting_asc:after,
+table.dataTable>thead .sorting_desc:after,
+table.dataTable极速>thead .sorting极速_asc_disabled:after,
+table.dataTable>thead .sorting_desc_disabled:after {
+    content: none !important; /* Hides arrows */
+}
+
+/* Enhanced container specifically for timeline chart */
+.timeline-chart-container {
+    position: relative;
+    height: 400px;
+    min-height: 400px;
+    width: 100%;
+}
+
+/* Special styling for timeline chart */
+#timelineChart {
+    min-height: 400px !important;
+}
+
+/* Enhanced container for vertical country chart */
+.country-chart-container {
+    position: relative;
+    height: 800px;  /* Increased height to show all countries */
+    min-height: 800px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.country-chart-container.scrollable {
+    overflow-y: auto;
+    max-height: 800px;
+}
+
+/* Special styling for vertical country chart */
+#countryChart {
+    min-height: 800px !important;
+    width: 100% !important;
+}
+
+/* Ensure chart canvas has enough space */
+#countryChart canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Custom scrollbar for the chart container if needed */
+.country-chart-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.country-chart-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.country-chart-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.country-chart-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .country-chart-container {
+        height: 1000px;
+        min-height: 1000px;
+    }
+    
+    #countryChart {
+        min-height: 1000px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .country-chart-container {
+        height: 1200px;  /* Even taller on mobile */
+        min-height: 1200px;
+        overflow-y: auto; /* Allow scrolling on mobile */
+    }
+    
+    #countryChart {
+        min-height: 1200px !important;
+        transform: scale(0.9);
+        transform-origin: top left;
+    }
+}
+
+/* Ensure y-axis labels are visible */
+.chartjs-render-monitor {
+    overflow: visible !important;
+}
+
+/* Custom tooltip styling */
+.chartjs-tooltip {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid #ddd !important;
+    border-radius: 6px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    padding: 10px !important;
+    font-size: 12px !important;
+}
+
+/* Toggle button styles for map controls */
+.btn-group .btn-success {
+    background-color: #198754; /* Green when selected */
+    border-color: #198754;
+    color: white !important; /* White text always */
+}
+
+.btn-group .btn-outline-success {
+    background-color: #dc3545; /* Red background when unselected */
+    border-color: #dc3545;     /* Red border when unselected */
+    color: white !important;   /* White text always */
+}
+
+.btn-group .btn-outline-success:hover {
+    background-color: #dc3545; /* Red on hover (not green) */
+    border-color: #dc3545;
+    color: white !important;   /* White text always */
+}
+
+.btn-group .btn-primary {
+    background-color: #0d6efd; /* Blue when selected */
+    border-color: #0d6efd;
+    color: white !important;   /* White text always */
+}
+
+.btn-group .btn-outline-primary {
+    background-color: #dc3545; /* Red background when unselected */
+    border-color: #dc3545;     /* Red border when unselected */
+    color: white !important;   /* White text always */
+}
+
+.btn-group .btn-outline-primary:hover {
+    background-color: #dc3545; /* Red on hover (not blue) */
+    border-color: #dc3545;
+    color: white !important;   /* White text always */
+}
+
+/* Ensure button text is always visible */
+.btn-group .btn {
+    text-shadow: none;
+    opacity: 1;
+}
+
+/* Hover effects for better visibility */
+.btn-group .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Map overlay controls - moved to top right */
+.map-overlay-controls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    max-width: 280px;
+}
+
+.map-control-card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, 0.92);
+    border-radius: 8px;
+}
+
+.map-control-card .card-body {
+    padding: 12px;
+}
+
+.map-control-card .card-title {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8极速px;
+}
+
+/* Dragging styles for map controls */
+.map-overlay-controls.dragging {
+    cursor: grabbing;
+    opacity: 0.9;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.map-overlay-controls {
+    cursor: default;
+    transition: all 0.3s ease;
+}
+
+/* Responsive adjustments for map controls */
+@media (max-width: 768px) {
+    .map-overlay-controls {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+    
+    .map-control-card {
+        width: 100%;
+    }
+}
+
+.map-overlay-controls:active {
+    cursor: default;
+}
+
+/* Logo */
+/* Logo container for proper alignment */
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+}
+
+/* Bigger circular logo styling */
+.dashboard-logo {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border: 3px solid #fff;
+    background-color: #fff;
+}
+
+/* Dashboard title styling for better balance */
+.dashboard-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .dashboard-logo {
+        height: 55px;
+        width: 55px;
+    }
+    
+    .dashboard-title {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-logo {
+        height: 50px;
+        width: 50px;
+        border-width: 2px;
+    }
+    
+    .dashboard-title {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .logo-container {
+        margin-right: 10px;
+    }
+    
+    .dashboard-logo {
+        height: 45px;
+        width: 45px;
+    }
+    
+    .dashboard-title {
+        font-size: 1.4rem;
+    }
+}
+
+/* Fullscreen map styles */
+.leaflet-fullscreen-on .map-overlay-controls {
+    z-index: 9999 !important; /* Ensure controls stay on top in fullscreen */
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+}
+
+/* Adjust controls for mobile fullscreen */
+@media (max-width: 768px) {
+    .leaflet-fullscreen-on .map-overlay-controls {
+        top: 10px !important;
+        right: 10px !important;
+        left: auto !important;
+        max-width: 280px !important;
+    }
+    
+    .leaflet-fullscreen-on .map-control-card {
+        width: 100% !important;
+    }
+}
+
+/* Ensure controls are visible during fullscreen transition */
+.leaflet-fullscreen-on .map-overlay-controls {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Fullscreen button styling */
+.leaflet-control-fullscreen {
+    background: white !important;
+    border-radius: 4px !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+.leaflet-control-fullscreen a {
+    background-color: white !important;
+    color: #333 !important;
+    border-radius: 4px !important;
+}
+
+.leaflet-control-fullscreen a:hover {
+    background-color: #f8f9fa !important;
+}
+
+/* Fullscreen mode specific styles */
+.leaflet-fullscreen-on {
+    background-color: #f8f9fa !important;
+}
+
+.leaflet-fullscreen-on .map-container {
+    background-color: #f8f9fa !important;
+}

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Rabies Outbreak Dashboard</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/2.0.0/Control.FullScreen.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-sticky">
+            <div class="d-flex align-items-center mb-2">
+                <div class="logo-container">
+                    <img src="static/images/SwinVET.png" alt="SwinVET Logo" class="dashboard-logo">
+                </div>
+                <h1 class="dashboard-title">Dashboard</h1>
+            </div>
+            
+            <div class="card mb-2">
+                <div class="card-body py-2">
+                    <h6 class="card-title mb-1">Outbreak Statistics</h6>
+                    <div class="stats-container">
+                        <div class="stat-item">
+                            <span class="stat-value" id="totalOutbreaks">0</span>
+                            <span class="stat-label">Outbreaks</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="totalCases">0</span>
+                            <span class="stat-label">Cases</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="totalDeaths">0</span>
+                            <span class="stat-label">Deaths</span>
+                        </div>
+                    </div>
+                    <!-- Date range display -->
+                    <div class="date-range-container mt-1">
+                        <small class="text-muted" id="dateRange">Date range: Loading...</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card prediction-container">
+                <div class="card-body py-2">
+                    <h6 class="card-title prediction-title mb-1">
+                        <i class="fas fa-robot"></i> AI Prediction
+                    </h6>
+                    
+                    <div class="mb-1">
+                        <label for="predictionCountry" class="form-label">Country</label>
+                        <select class="form-select form-select-sm" id="predictionCountry">
+                            <option value="all" selected>All Countries</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-1">
+                        <label for="predictionInterval" class="form-label">Interval</label>
+                        <select class="form-select form-select-sm" id="predictionInterval">
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-1" id="dateInputContainer">
+                        <!-- Dynamic content will be inserted here -->
+                    </div>
+                    
+                    <div id="dateValidationMessage" class="date-validation">
+                        Please select a future date for prediction.
+                    </div>
+                    
+                    <button id="predictButton" class="btn btn-primary btn-sm w-100 mt-1">
+                        <i class="fas fa-calculator"></i> Predict
+                    </button>
+                    
+                    <div class="loading-spinner" id="predictionSpinner"></div>
+                    
+                    <div class="prediction-result mt-1" id="predictionResult">
+                        <div id="predictionText">Select options and click predict</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        <div class="dashboard-container">
+            <ul class="nav nav-tabs" id="dashboardTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="map-tab" data-bs-toggle="tab" data-bs-target="#map-pane" type="button" role="tab">Map</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="data-tab" data-bs-toggle="tab" data-bs-target="#data" type="button" role="tab">Historical Data</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="chart-tab" data-bs-toggle="tab" data-bs-target="#chart" type="button" role="tab">Chart</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="filter-tab" data-bs-toggle="tab" data-bs-target="#filter" type="button" role="tab">Filter</button>
+                </li>
+            </ul>
+            
+            <div class="tab-content mt-2 tab-content-container">
+                <div class="tab-pane fade show active" id="map-pane" role="tabpanel">
+                    <!-- Map container with overlay controls -->
+                    <div class="map-container">
+                        <div id="map">
+                            <div class="map-placeholder">
+                                <div class="text-center">
+                                    <i class="fas fa-map-marked-alt fa-3x mb-3"></i>
+                                    <p>Loading outbreak map...</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Map overlay controls - positioned at top right -->
+                        <div class="map-overlay-controls">
+                            <div class="card map-control-card">
+                                <div class="card-body py-2">
+                                    <h6 class="card-title">Filter by Country</h6>
+                                    <div class="mb-2">
+                                        <input class="form-control form-control-sm" list="countryOptions" id="countryFilter" placeholder="Type or select a country">
+                                        <datalist id="countryOptions"></datalist>
+                                    </div>
+
+                                    <button id="resetFilters" class="btn btn-outline-secondary btn-sm w-100">Reset Filter</button>
+
+                                    <!-- Toggle Buttons -->
+                                    <div class="btn-group w-100 mt-2" role="group" aria-label="Outbreak Toggle">
+                                        <button id="toggleActual" class="btn btn-sm btn-success active">Actual Outbreaks</button>
+                                        <button id="togglePredicted" class="btn btn-sm btn-primary active">Predicted Outbreaks</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-2">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body py-2">
+                                    <h6 class="card-title">Outbreaks Over Time</h6>
+                                    <div class="chart-container" style="height: 200px;">
+                                        <canvas id="mapTimelineChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="data" role="tabpanel">
+                    <div class="scrollable-content">
+                        <table id="outbreakTable" class="table table-striped table-hover" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Country</th>
+                                    <th>Location</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Cases</th>
+                                    <th>Deaths</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="chart" role="tabpanel">
+                    <div class="scrollable-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body py-2">
+                                        <h6 class="card-title">Cases with Fatality and Non-fatality</h6>
+                                        <div class="chart-container" style="height: 200px;">
+                                            <canvas id="casesDeathsChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body py-2">
+                                        <h6 class="card-title">Outbreaks by Country</h6>
+                                        <div class="country-chart-container">
+                                            <canvas id="countryChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body py-2">
+                                        <h6 class="card-title">Outbreaks Over Time</h6>
+                                        <div class="timeline-chart-container">
+                                            <canvas id="timelineChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="filter" role="tabpanel">
+                    <div class="card mb-2">
+                        <div class="card-body py-2">
+                            <h6 class="card-title">Disease Spread Timeline</h6>
+                            
+                            <div class="row mb-2">
+                                <div class="col-md-4">
+                                    <label for="timelineCountryFilter" class="form-label">Choose A Country to Display</label>
+                                    <input class="form-control form-control-sm" list="timelineCountryOptions" id="timelineCountryFilter" placeholder="All countries">
+                                    <datalist id="timelineCountryOptions"></datalist>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="timelineStartDate" class="form-label">Start Date</label>
+                                    <input type="date" class="form-control form-control-sm" id="timelineStartDate">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="timelineEndDate" class="form-label">End Date</label>
+                                    <input type="date" class="form-control form-select-sm" id="timelineEndDate">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-12">
+                                    <button id="clearTimelineFilters" class="btn btn-outline-secondary btn-sm me-2">
+                                        <i class="fas fa-times"></i> Clear
+                                    </button>
+                                    <button id="applyTimelineFilters" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-filter"></i> Apply
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <label for="timelineSpeed" class="form-label">Speed</label>
+                                    <input type="range" class="form-range" id="timelineSpeed" min="1" max="10" value="8">
+                                    <div class="form-text" id="speedValue">Fast speed</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <button id="playTimeline" class="btn btn-success btn-sm me-1">
+                                        <i class="fas fa-play"></i> Play
+                                    </button>
+                                    <button id="pauseTimeline" class="btn btn-warning btn-sm me-1" disabled>
+                                        <i class="fas fa-pause"></i> Pause
+                                    </button>
+                                    <button id="resetTimeline" class="btn btn-outline-secondary btn-sm">
+                                        <i class="fas fa-undo"></i> Reset
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="progress mb-2">
+                                <div class="progress-bar" id="timelineProgress" role="progressbar" style="width: 0%"></div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between mb-2">
+                                <span id="currentDateDisplay">No filters applied</span>
+                                <span id="outbreakCount">0 outbreaks</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="map-container" style="height: 60vh;">
+                        <div id="timeline-map">
+                            <div class="map-placeholder">
+                                <div class="text-center">
+                                    <i class="fas fa-map-marked-alt fa-3x mb-3"></i>
+                                    <p>Loading timeline map...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/2.0.0/Control.FullScreen.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <script src="static/js/script.js"></script>
+</body>
+</html>
