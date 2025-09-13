@@ -20,10 +20,13 @@ Scraping Data Using ChromeDriver
 5) Wait for the program to complete execution. The scraped data will be stored in wahis_outbreak_details.csv file.
 
 Running the Localhost Website
-1) Start the web application by running:
+1) Install everything in one go with:
+   <img width="774" height="99" alt="image" src="https://github.com/user-attachments/assets/96f53d1d-22eb-40e6-a010-c8b6fdb4812c" />
+
+2) Start the web application by running:
    <img width="734" height="99" alt="image" src="https://github.com/user-attachments/assets/4d2e1145-33fb-460d-8c44-9dfcb12a816d" />
 
-2) After execution, a localhost server URL will appear in the terminal (example shown below).
+3) After execution, a localhost server URL will appear in the terminal (example shown below).
    Press Ctrl + Click on the link to open the website in your browser.
    
    <img width="346" height="79" alt="image" src="https://github.com/user-attachments/assets/f90cdb31-7f5b-4910-913e-5145197740ed" />
