@@ -10,7 +10,7 @@ Scraping Data Using ChromeDriver
    (For additional guidance, you may follow this tutorial video: [YouTube Guide](https://youtu.be/Bpd04FH9ycs?si=oySCEJb65zGl-deM)).
 
 4) Install the required Python dependencies by running the following commands in your terminal:
-5) 
+   
    <img width="734" height="123" alt="image" src="https://github.com/user-attachments/assets/18e0bf03-dcc1-4a13-a2cc-75b494f40512" />
 
 6) Run the scraping script:
