@@ -10,6 +10,7 @@ Scraping Data Using ChromeDriver
    (For additional guidance, you may follow this tutorial video: [YouTube Guide](https://youtu.be/Bpd04FH9ycs?si=oySCEJb65zGl-deM)).
 
 4) Install the required Python dependencies by running the following commands in your terminal:
+5) 
    <img width="734" height="123" alt="image" src="https://github.com/user-attachments/assets/18e0bf03-dcc1-4a13-a2cc-75b494f40512" />
 
 6) Run the scraping script:
@@ -23,4 +24,5 @@ Running the Localhost Website
 
 2) After execution, a localhost server URL will appear in the terminal (example shown below).
    Press Ctrl + Click on the link to open the website in your browser.
+   
    <img width="346" height="79" alt="image" src="https://github.com/user-attachments/assets/f90cdb31-7f5b-4910-913e-5145197740ed" />
