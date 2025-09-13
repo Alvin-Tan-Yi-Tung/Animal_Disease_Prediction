@@ -4,9 +4,7 @@ Scarped Data using ChromeDriver:
 
 2) Go here (https://googlechromelabs.github.io/chrome-for-testing/) to download the Chrome Driver. You can follow this video to download and setup the Chrome Driver too (https://youtu.be/Bpd04FH9ycs?si=oySCEJb65zGl-deM).
 
-3) Go to terminal and need to install those things
-   -pip install undetected-chromedriver
-   -pip install selenium
+3) Go to terminal and need to install those things (pip install undetected-chromedriver, pip install selenium)
 
 4) Now you can just run the codes by typing "python scrape.py" in the terminal.
 
