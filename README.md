@@ -9,15 +9,14 @@ Scraping Data Using ChromeDriver
    https://googlechromelabs.github.io/chrome-for-testing/
    (For additional guidance, you may follow this tutorial video: [YouTube Guide](https://youtu.be/Bpd04FH9ycs?si=oySCEJb65zGl-deM)).
 
-4) Install the required Python dependencies by running the following commands in your terminal:
+3) Install the required Python dependencies by running the following commands in your terminal:
    
    <img width="734" height="123" alt="image" src="https://github.com/user-attachments/assets/18e0bf03-dcc1-4a13-a2cc-75b494f40512" />
 
-6) Run the scraping script:
-7) 
+4) Run the scraping script: 
    <img width="727" height="94" alt="image" src="https://github.com/user-attachments/assets/c6e55d11-b6e6-4f37-9a76-4634c3135ed7" />
 
-8) Wait for the program to complete execution. The scraped data will be generated automatically.
+5) Wait for the program to complete execution. The scraped data will be generated automatically.
 
 Running the Localhost Website
 1) Start the web application by running:
