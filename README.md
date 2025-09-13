@@ -17,7 +17,7 @@ Scraping Data Using ChromeDriver
     
    <img width="727" height="94" alt="image" src="https://github.com/user-attachments/assets/c6e55d11-b6e6-4f37-9a76-4634c3135ed7" />
 
-5) Wait for the program to complete execution. The scraped data will be generated automatically.
+5) Wait for the program to complete execution. The scraped data will be stored in wahis_outbreak_details.csv file.
 
 Running the Localhost Website
 1) Start the web application by running:
