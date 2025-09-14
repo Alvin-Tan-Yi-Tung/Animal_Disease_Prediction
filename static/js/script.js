@@ -637,25 +637,103 @@ function updateTimelineDisplay() {
     }
 }
 
-// Add this function to prevent map clicks when interacting with controls
+// Function to handle fullscreen changes
+function setupFullscreenHandling() {
+    // Listen for fullscreen changes
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+    document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+    document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+}
+
+// Function to handle fullscreen change events
+function handleFullscreenChange() {
+    const isFullscreen = document.fullscreenElement || 
+                         document.webkitFullscreenElement || 
+                         document.mozFullScreenElement || 
+                         document.msFullscreenElement;
+    
+    const mapControls = document.querySelector('.map-overlay-controls');
+    
+    if (isFullscreen) {
+        // When entering fullscreen, ensure controls are visible
+        if (mapControls) {
+            mapControls.style.display = 'block';
+            mapControls.style.zIndex = '9999';
+            mapControls.style.position = 'fixed';
+            mapControls.style.top = '20px';
+            mapControls.style.right = '20px';
+            
+            // Adjust for mobile
+            if (window.innerWidth <= 768) {
+                mapControls.style.top = '10px';
+                mapControls.style.right = '10px';
+                mapControls.style.left = 'auto';
+                mapControls.style.maxWidth = '280px';
+            }
+        }
+    } else {
+        // When exiting fullscreen, restore normal positioning
+        if (mapControls) {
+            mapControls.style.position = 'absolute';
+            mapControls.style.zIndex = '1000';
+            
+            // Reset to normal positioning
+            if (window.innerWidth <= 768) {
+                mapControls.style.left = '10px';
+                mapControls.style.right = '10px';
+                mapControls.style.bottom = '10px';
+                mapControls.style.maxWidth = 'none';
+            } else {
+                mapControls.style.left = 'auto';
+                mapControls.style.right = '20px';
+                mapControls.style.top = '20px';
+                mapControls.style.bottom = 'auto';
+                mapControls.style.maxWidth = '280px';
+            }
+        }
+    }
+}
+
+// Setup map controls
 function setupMapControls() {
     const mapControls = document.querySelector('.map-overlay-controls');
     
-    // Function to update control styling on resize
+    // Function to update control styling on resize and fullscreen changes
     function updateControlsStyle() {
-        if (window.innerWidth <= 768) {
+        const isFullscreen = document.fullscreenElement || 
+                             document.webkitFullscreenElement ||
+                             document.mozFullScreenElement ||
+                             document.msFullscreenElement;
+        
+        if (isFullscreen) {
+            // Fullscreen view - fixed positioning
+            mapControls.style.position = 'fixed';
+            mapControls.style.left = 'auto';
+            mapControls.style.right = '20px';
+            mapControls.style.top = '20px';
+            mapControls.style.bottom = 'auto';
+            mapControls.style.maxWidth = '280px';
+            mapControls.style.zIndex = '9999';
+            mapControls.style.display = 'block'; // Ensure it's visible
+        } else if (window.innerWidth <= 768) {
             // Mobile view - full width at bottom
+            mapControls.style.position = 'absolute';
             mapControls.style.left = '10px';
             mapControls.style.right = '10px';
             mapControls.style.bottom = '10px';
+            mapControls.style.top = 'auto';
             mapControls.style.maxWidth = 'none';
+            mapControls.style.zIndex = '1000';
         } else {
-            // Desktop view - fixed top right (changed from bottom right)
+            // Desktop view - fixed top right
+            mapControls.style.position = 'absolute';
             mapControls.style.left = 'auto';
             mapControls.style.right = '20px';
-            mapControls.style.top = '20px'; // Changed from bottom to top
+            mapControls.style.top = '20px';
             mapControls.style.bottom = 'auto';
             mapControls.style.maxWidth = '280px';
+            mapControls.style.zIndex = '1000';
         }
     }
     
@@ -708,11 +786,98 @@ function setupMapControls() {
         }
     });
     
+    // Add fullscreen change event listeners
+    function setupFullscreenListeners() {
+        const events = [
+            'fullscreenchange',
+            'webkitfullscreenchange',
+            'mozfullscreenchange',
+            'MSFullscreenChange'
+        ];
+        
+        events.forEach(event => {
+            document.addEventListener(event, function() {
+                // Small delay to ensure fullscreen mode is fully active
+                setTimeout(updateControlsStyle, 100);
+            });
+        });
+    }
+    
+    // Also listen for fullscreen events on the map container
+    const mapContainer = document.getElementById('map');
+    if (mapContainer) {
+        mapContainer.addEventListener('fullscreenchange', function() {
+            setTimeout(updateControlsStyle, 100);
+        });
+    }
+    
     // Initial style setup
     updateControlsStyle();
+    setupFullscreenListeners();
     
     // Update on window resize
     window.addEventListener('resize', updateControlsStyle);
+    
+    // Also update when the map tab is shown (in case of tab switching)
+    $('#map-tab').on('shown.bs.tab', function() {
+        setTimeout(updateControlsStyle, 300);
+    });
+}
+
+// Function to handle fullscreen changes
+function setupFullscreenHandling() {
+    // Listen for fullscreen changes
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+    document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+    document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+}
+
+// Function to handle fullscreen change events
+function handleFullscreenChange() {
+    const isFullscreen = document.fullscreenElement || 
+                         document.webkitFullscreenElement || 
+                         document.mozFullScreenElement || 
+                         document.msFullscreenElement;
+    
+    const mapControls = document.querySelector('.map-overlay-controls');
+    
+    if (!mapControls) return;
+    
+    if (isFullscreen) {
+        // When entering fullscreen, ensure controls are visible
+        mapControls.style.display = 'block';
+        mapControls.style.zIndex = '9999';
+        mapControls.style.position = 'fixed';
+        mapControls.style.top = '20px';
+        mapControls.style.right = '20px';
+        
+        // Adjust for mobile
+        if (window.innerWidth <= 768) {
+            mapControls.style.top = '10px';
+            mapControls.style.right = '10px';
+            mapControls.style.left = 'auto';
+            mapControls.style.maxWidth = '280px';
+        }
+    } else {
+        // When exiting fullscreen, restore normal positioning
+        mapControls.style.position = 'absolute';
+        mapControls.style.zIndex = '1000';
+        
+        // Reset to normal positioning
+        if (window.innerWidth <= 768) {
+            mapControls.style.left = '10px';
+            mapControls.style.right = '10px';
+            mapControls.style.bottom = '10px';
+            mapControls.style.maxWidth = 'none';
+        } else {
+            mapControls.style.left = 'auto';
+            mapControls.style.right = '20px';
+            mapControls.style.top = '20px';
+            mapControls.style.bottom = 'auto';
+            mapControls.style.maxWidth = '280px';
+        }
+    }
 }
 
 // Handle tab change to destroy timeline map when not visible
@@ -825,7 +990,7 @@ function initMap() {
     try {
         map = L.map('map', {
             preferCanvas: true,
-            fullscreenControl: true,
+            fullscreenControl: true, // Enable built-in fullscreen control
             worldCopyJump: false,
             maxBounds: MAP_BOUNDS,
             maxBoundsViscosity: 1.0
@@ -843,6 +1008,14 @@ function initMap() {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             noWrap: true,
             maxZoom: 19
+        }).addTo(map);
+        
+        // Add fullscreen control
+        L.control.fullscreen({
+            position: 'topleft', // Position the fullscreen button
+            title: 'View Fullscreen',
+            titleCancel: 'Exit Fullscreen',
+            forceSeparateButton: true // Important: show as separate button
         }).addTo(map);
         
         // Initialize layers with separate cluster groups
@@ -922,7 +1095,7 @@ function initMap() {
         
         $('.map-placeholder').remove();
     } catch (error) {
-    console.error('Map initialization error:', error);
+        console.error('Map initialization error:', error);
     }
 }
 

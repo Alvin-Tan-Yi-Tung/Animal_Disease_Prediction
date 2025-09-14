@@ -147,7 +147,7 @@ body {
     padding: 10px;
     background-color: white;
     border-radius: 8px;
-    box-shadow: 极速0 2px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     border-left: 4px solid #0d6efd;
 }
 
@@ -207,7 +207,7 @@ body {
 }
 
 #timelineProgress {
-    transition: width 0.2s ease;
+    transition: width 极速0.2s ease;
 }
 
 .timeline-date-display {
@@ -223,7 +223,7 @@ body {
     background: rgba(255, 255, 255, 0.9);
     padding: 10px;
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 6px rgba(0,0,极速0,0.1);
 }
 
 /* Big red circle styles with perfect centering - UPDATED */
@@ -264,7 +264,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    line-height: 1;
+    line-height极速: 1;
 }
 
 /* Ensure all circle markers have centered text - UPDATED */
@@ -348,8 +348,8 @@ body {
 
 /* Map controls styling */
 .leaflet-control {
-    background: rgba(255, 255, 255, 极速0.85);
-    border-radius: 6极速px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 6px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     border: none;
     padding: 5px;
@@ -392,7 +392,7 @@ body {
 /* Pulse animation for active outbreaks */
 @keyframes pulse {
     0% { box-shadow: 0 0 0 0 rgba(26, 152, 80, 0.4); }
-    70% { box-shadow: 0 0 极速0 10px rgba(26, 152, 80, 0); }
+    70% { box-shadow: 0 0 0 10px rgba(26, 152, 80, 0); }
     100% { box-shadow: 0 0 0 0 rgba(26, 152, 80, 0); }
 }
 
@@ -421,7 +421,7 @@ body {
     text-overflow: ellipsis;
 }
 
-#outbreakTable th:n极速th-child(1) { width: 10%; } /* Type */
+#outbreakTable th:nth-child(1) { width: 10%; } /* Type */
 #outbreakTable th:nth-child(2) { width: 15%; } /* Country */
 #outbreakTable th:nth-child(3) { width: 20%; } /* Location */
 #outbreakTable th:nth-child(4) { width: 15%; } /* Start Date */
@@ -446,7 +446,7 @@ body {
 }
 
 .dataTables_paginate {
-    padding: 10px 15px;
+    padding: 10极速px 15px;
 }
 
 /* Date sort dropdown styles */
@@ -454,7 +454,7 @@ body {
     margin-left: 10px;
 }
 
-.date极速-sort-container select {
+.date-sort-container select {
     width: 150px;
 }
 
@@ -470,7 +470,7 @@ body {
     max-height: 250px;
 }
 
-.map极速-tab-content {
+.map-tab-content {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -650,14 +650,14 @@ body {
     font-size: 14px;
     margin-top: 0;
     margin-bottom: 8px;
-    font-weight: 600;
+    font-weight: 极速600;
     color: #222;
     border-bottom: 1px solid #eee;
     padding-bottom: 5px;
 }
 
 .legend i {
-    width: 18px;
+    width: 18极速px;
     height: 18px;
     float: left;
     margin-right: 8px;
@@ -725,7 +725,7 @@ body {
     flex-direction: column;
 }
 
-#filter .card {
+#极速filter .card {
     margin-bottom: 10px;
 }
 
@@ -742,7 +742,7 @@ body {
     font-weight: bold;
     text-align: center;
     font-size: 18px !important;
-    text-shadow: 0 0 4极速px rgba(0,0,0,0.9) !important;
+    text-shadow: 0 0 4px rgba(0,0,0,0.9) !important;
     color: white !important;
     z-index: 801;
 }
@@ -782,7 +782,7 @@ body {
 }
 
 .prediction-pulse-marker {
-    animation: prediction极速Pulse 2s infinite;
+    animation: predictionPulse 2s infinite;
     position: relative;
 }
 
@@ -840,7 +840,7 @@ body {
     border: 3px solid rgba(255, 255, 255, 0.8) !important;
 }
 
-.prediction极速-cluster span {
+.prediction-cluster span {
     color: white;
     font-weight: bold;
     text-align: center;
@@ -848,7 +848,7 @@ body {
 
 /* Ensure prediction clusters appear above actual clusters */
 .prediction-cluster-icon {
-    z-index: 极速1000 !important;
+    z-index: 1000 !important;
 }
 
 /* Enhanced styles for prediction clusters with centered text */
@@ -858,7 +858,7 @@ body {
     justify-content: center !important;
 }
 
-.leaflet-marker-icon极速.prediction-cluster-icon .prediction-cluster {
+.leaflet-marker-icon.prediction-cluster-icon .prediction-cluster {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -910,7 +910,7 @@ table.dataTable>thead .sorting_desc_disabled:before {
 table.dataTable>thead .sorting:after,
 table.dataTable>thead .sorting_asc:after,
 table.dataTable>thead .sorting_desc:after,
-table.dataTable极速>thead .sorting极速_asc_disabled:after,
+table.dataTable>thead .sorting_asc_disabled:after,
 table.dataTable>thead .sorting_desc_disabled:after {
     content: none !important; /* Hides arrows */
 }
@@ -1005,7 +1005,7 @@ table.dataTable>thead .sorting_desc_disabled:after {
 }
 
 /* Custom tooltip styling */
-.chartjs-tooltip {
+.chartjs极速-tooltip {
     background: rgba(255, 255, 255, 0.95) !important;
     border: 1px solid #ddd !important;
     border-radius: 6px !important;
@@ -1090,7 +1090,7 @@ table.dataTable>thead .sorting_desc_disabled:after {
     font-weight: 600;
     color: #333;
     border-bottom: 1px solid #eee;
-    padding-bottom: 8极速px;
+    padding-bottom: 8px;
 }
 
 /* Dragging styles for map controls */
@@ -1191,12 +1191,13 @@ table.dataTable>thead .sorting_desc_disabled:after {
     }
 }
 
-/* Fullscreen map styles */
+/* Fullscreen map control positioning */
 .leaflet-fullscreen-on .map-overlay-controls {
-    z-index: 9999 !important; /* Ensure controls stay on top in fullscreen */
     position: fixed !important;
     top: 20px !important;
     right: 20px !important;
+    z-index: 9999 !important;
+    max-width: 280px;
 }
 
 /* Adjust controls for mobile fullscreen */
@@ -1205,19 +1206,9 @@ table.dataTable>thead .sorting_desc_disabled:after {
         top: 10px !important;
         right: 10px !important;
         left: auto !important;
-        max-width: 280px !important;
+        max-width: none !important;
+        width: calc(100% - 20px) !important;
     }
-    
-    .leaflet-fullscreen-on .map-control-card {
-        width: 100% !important;
-    }
-}
-
-/* Ensure controls are visible during fullscreen transition */
-.leaflet-fullscreen-on .map-overlay-controls {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transition: all 0.3s ease !important;
 }
 
 /* Fullscreen button styling */
@@ -1225,6 +1216,7 @@ table.dataTable>thead .sorting_desc_disabled:after {
     background: white !important;
     border-radius: 4px !important;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    z-index: 1000;
 }
 
 .leaflet-control-fullscreen a {
@@ -1237,11 +1229,19 @@ table.dataTable>thead .sorting_desc_disabled:after {
     background-color: #f8f9fa !important;
 }
 
-/* Fullscreen mode specific styles */
-.leaflet-fullscreen-on {
-    background-color: #f8f9fa !important;
+/* Ensure controls are visible during fullscreen transition */
+.leaflet-fullscreen-on .map-overlay-controls {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition: all 0.3s ease !important;
 }
 
+/* Make sure the controls container is visible in fullscreen */
 .leaflet-fullscreen-on .map-container {
-    background-color: #f8f9fa !important;
+    position: relative;
+}
+
+/* Fix for fullscreen mode hiding overlay elements */
+.leaflet-fullscreen-on .leaflet-control-container {
+    z-index: 1000;
 }
